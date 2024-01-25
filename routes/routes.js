@@ -15,4 +15,25 @@ router.get('/view', (req,res) => {
     });
 });
 
+//add employee
+
+router.get('/addemployee', (req,res) =>{
+    res.render('addemployee')
+});
+
+router.post('/addemployee', (req, res) =>{
+
+console.log(req.body);
+
+const{name, address, number, role, salary} = req.body;
+
+const values = [name, address, number, role, salary];
+
+const selectSQL = `INSERT INTO employee (employee_name, employee_address, employee_number, employee_role, employee_salary) VALUES (?,?,?,?,?)`  ;
+db.query(selectSQL, values, (err, rows) => {
+    res.redirect('/view');
+});
+
+});
+
 module.exports = router;
