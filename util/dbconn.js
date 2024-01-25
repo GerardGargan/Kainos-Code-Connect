@@ -5,7 +5,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: '',
     port: '3306',
-    database: 'kainos code camp'
+    database: 'kainos'
 });
 
 db.connect((err) => {
