@@ -15,7 +15,7 @@ router.get('/view', (req, res) => {
         res.render('viewemployees', { data: rows, role: req.session.role });
     });
     } else {
-        res.render('login', {error: 'User not logged in'});
+        res.render('login', {error: 'You must first log in'});
     }
     
 });
@@ -23,8 +23,11 @@ router.get('/view', (req, res) => {
 //add employee
 
 router.get('/addemployee', (req, res) => {
-    
-    res.render('addemployee')
+    if(req.session.isLoggedIn == true) {
+    res.render('addemployee');
+    } else {
+        res.render('login', {error: 'You must first log in'})
+    }
 });
 
 router.post('/addemployee', (req, res) => {
