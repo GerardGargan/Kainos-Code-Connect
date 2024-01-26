@@ -16,7 +16,10 @@
             <th scope="col">Employee No.</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
-            <th scope="col">Salary</th>
+            <% if(role == 'admin') { %>
+              <th scope="col">Salary</th>
+            <% } %>
+            
             <th scope="col">Role</th>
             <th scope="col">Changes</th>
           </tr>
@@ -34,7 +37,10 @@
             <td scope="row"><%= employee_number %></td>
             <td><%= employee_name %></td>
             <td><%= employee_address %></td>
-            <td><%= employee_salary %></td>
+            <% if(role == 'admin') { %>
+              <td><%= employee_salary %></td>
+            <% } %>
+            
             <td><%= employee_role %></td>
             <td><a href="/editemployee/<%= employee_id %>" type="Edit" class="btn btn-primary">Edit</button></td>
           </tr>
