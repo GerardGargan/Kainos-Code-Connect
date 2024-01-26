@@ -65,4 +65,38 @@ router.post('/login', (req, res) => {
     });
 });
 
+// edit employee
+
+router.get('/editemployee/:id', (req,res) => {
+    
+    const{id}=req.params;
+    const vals = [id];
+    const selectSQL = `SELECT * FROM employee WHERE employee_id =?`;
+
+    db.query(selectSQL, vals, (err, rows) => {
+        console.log(rows);
+        res.render('editemployee', {data: rows[0]});
+    });
+});
+
+router.post('/editemployee', (req, res) => {
+    
+    
+    const { name, address, role, salary, id } = req.body;
+    const values = [name, address, role, salary, id]; // assuming 'number' is the identifier for the employee
+    
+    const updateSQL = `UPDATE employee SET employee_name = ?, employee_address = ?, employee_role = ?, employee_salary = ? WHERE employee_id = ?`;
+    console.log(req.body);
+    db.query(updateSQL, values, (err, result) => {
+        if (err) {
+            console.error("Error updating employee:", err);
+            res.status(500).send("Error updating employee.");
+        } else {
+            console.log("Employee updated successfully.");
+            res.redirect('/view');
+        }
+    });
+});
+
+
 module.exports = router;
