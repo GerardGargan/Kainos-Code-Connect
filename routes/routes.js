@@ -99,4 +99,24 @@ router.post('/editemployee', (req, res) => {
 });
 
 
+// delete employee
+
+router.post('/delete', (req, res) => {
+    
+    
+    const { id } = req.body;
+    const values = [id]; 
+    
+    const deleteSQL = `DELETE from employee WHERE employee_id = ?`;
+    console.log(req.body);
+    db.query(deleteSQL, values, (err, result) => {
+        if (err) {
+            console.error("Error deleting employee:", err);
+            res.status(500).send("Error deleting employee.");
+        } else {
+            console.log("Employee deleted successfully.");
+            res.redirect('/view');
+        }
+    });
+});
 module.exports = router;
