@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('./../util/dbconn');
 
 router.get('/', (req, res) => {
-
+    res.redirect('login');
 });
 
 router.get('/view', (req, res) => {
